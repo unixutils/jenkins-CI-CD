@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-import requests
-import json
-import base64
-import sys
-import os
 from datetime import datetime
+import base64
+import json
+import os
+import requests
+import sys
 
 # Get inputs from jenkins job
-JOB_NAME = sys.argv[1]
 BUILD_NUMBER = sys.argv[2]
 BUILD_TAG = sys.argv[3]
+JOB_NAME = sys.argv[1]
 
 # WP Post configuration
-url = "https://unixutils.com/wp-json/wp/v2/posts/"
-postID = "2877"
+url = os.environ['wpurl']
+postID = os.environ['wppostid']
 user = os.environ['wpuser']
 password = os.environ['wppw']
 credentials = user + ':' + password
@@ -35,4 +35,4 @@ post = {
 }
 
 response = requests.post(url + postID , headers=header, json=post)
-print(response.content)
+print(response)
