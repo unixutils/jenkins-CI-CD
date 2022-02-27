@@ -15,11 +15,14 @@ password = os.environ['wppw']
 credentials = user + ':' + password
 token = base64.b64encode(credentials.encode())
 header = {'Authorization': 'Basic ' + token.decode('utf-8')}
+jenkinsuser = os.environ['jenkinsuser']
+jenkinstoken = os.environ['jenkinstoken']
+jenkinsauth    = (jenkinsuser, jenkinstoken)
 
 # Content for WP Post
 now = datetime.now()
 current_time = now.strftime("%d/%m/%Y %H:%M:%S")
-log = requests.get(consoleurl).text
+log = requests.get(consoleurl, auth=jenkinsauth).text
 print(log)
 
 
