@@ -19,7 +19,7 @@ header = {'Authorization': 'Basic ' + token.decode('utf-8')}
 # Content for WP Post
 now = datetime.now()
 current_time = now.strftime("%d/%m/%Y %H:%M:%S")
-log = requests.get(CONSOLE).text
+log = requests.get(consoleurl).text
 
 
 content = """This post was updated using a CI/CD pipeline job run by jenkins on AWS @{0}.
