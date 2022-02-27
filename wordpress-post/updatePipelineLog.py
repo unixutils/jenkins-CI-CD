@@ -5,6 +5,7 @@ import json
 import os
 import requests
 import sys
+import re
 
 # WP Post configuration
 consoleurl = os.environ['buildurl'] + 'consoleText'
@@ -23,8 +24,8 @@ jenkinsauth    = (jenkinsuser, jenkinstoken)
 now = datetime.now()
 current_time = now.strftime("%d/%m/%Y %H:%M:%S")
 log = requests.get(consoleurl, auth=jenkinsauth).text
-print(log)
-
+log = re.sub('(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', '*********', log)
+log = re.sub('.*export.*\n?', '', log)
 
 content = """This post was updated using a CI/CD pipeline job run by jenkins on AWS @{0}.
 
