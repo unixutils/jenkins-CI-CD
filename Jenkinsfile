@@ -1,5 +1,9 @@
 node {
     stage('test') {
-        find .
+        steps {
+             sh '''#!/bin/bash
+                 find .
+             '''
+           }
     }
 }
